@@ -2,28 +2,24 @@
   <v-card class="mt-6 mb-3 pa-4">
     <v-row>
       <v-col cols="12" md="4">
-        <v-text-field
+        <AccountLoginField
           v-model="localAccount.login"
-          label="Логин"
           @blur="emitUpdate"
         />
       </v-col>
 
       <v-col cols="12" md="3">
-        <v-select
+        <AccountTypeField
           v-model="localAccount.type"
           :items="types"
-          label="Тип записи"
-          @update:model-value="emitUpdate"
+          @update:model-value="onTypeChange"
         />
       </v-col>
 
       <v-col cols="12" md="3">
-        <v-text-field
-          v-if="localAccount.type === 'LOCAL'"
+        <AccountPasswordField
           v-model="localAccount.password"
-          label="Пароль"
-          type="password"
+          :visible="localAccount.type === 'LOCAL'"
           @blur="emitUpdate"
         />
       </v-col>
@@ -41,6 +37,10 @@
   import type { Account } from '@/domain/models/account'
   import { reactive, watch } from 'vue'
 
+  import AccountLoginField from './fields/AccountLoginField.vue'
+  import AccountPasswordField from './fields/AccountPasswordField.vue'
+  import AccountTypeField from './fields/AccountTypeField.vue'
+
   const props = defineProps<{
     account: Account
   }>()
@@ -54,15 +54,16 @@
 
   const localAccount = reactive({ ...props.account })
 
-  watch(
-    () => props.account,
-    newAccount => {
-      Object.assign(localAccount, newAccount)
-    },
-  )
-
   function emitUpdate () {
     emit('update', { ...localAccount })
+  }
+
+  function onTypeChange (type: Account['type']) {
+    localAccount.type = type
+    if (type === 'LDAP') {
+      localAccount.password = null
+    }
+    emitUpdate()
   }
 
   function emitRemove () {
