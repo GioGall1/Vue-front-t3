@@ -18,8 +18,6 @@ declare module 'vue' {
     AccountPasswordField: typeof import('./components/accounts/fields/AccountPasswordField.vue')['default']
     AccountsForm: typeof import('./components/accounts/AccountsForm.vue')['default']
     AccountTypeField: typeof import('./components/accounts/fields/AccountTypeField.vue')['default']
-    AppFooter: typeof import('./components/AppFooter.vue')['default']
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
