@@ -1,1 +1,0 @@
-import{v as e,x as o,aV as t}from"./index-DFKuSRtV.js";const n={style:{color:"red","font-size":"32px"}},_=e({__name:"AccountsPage",setup(s){return(c,a)=>(o(),t("div",n," INDEX PAGE RENDERED "))}});export{_ as default};
