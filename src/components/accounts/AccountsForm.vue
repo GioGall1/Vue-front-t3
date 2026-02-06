@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="mt-4">
     <v-row align="center" justify="space-between">
       <h2>Учетные записи</h2>
       <v-btn color="primary" @click="onAdd">
@@ -17,18 +17,19 @@
 
 <script lang="ts" setup>
   import type { Account } from '@/domain/models/account'
+  import { storeToRefs } from 'pinia'
   import { useAccountsStore } from '@/stores/accounts.store'
   import AccountList from './AccountList.vue'
 
   const store = useAccountsStore()
-  const accounts = store.accounts
+  const { accounts } = storeToRefs(store)
 
   function onAdd () {
     store.addAccount({
       id: crypto.randomUUID(),
       type: 'LOCAL',
-      login: '',
-      password: '',
+      login: 'test',
+      password: '123',
       labels: [],
     })
   }
