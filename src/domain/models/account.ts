@@ -7,5 +7,5 @@ export type Account = {
   type: AccountType
   login: string
   password: string | null
-  labes: Labels
+  labels: Labels
 }
